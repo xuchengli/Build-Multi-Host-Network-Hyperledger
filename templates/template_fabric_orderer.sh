@@ -10,7 +10,7 @@ docker run --rm -it \
            -e ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block \
            -e ORDERER_GENERAL_LOCALMSPID=OrdererMSP \
            -e ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp \
-           -e ORDERER_GENERAL_TLS_ENABLED=false \
+           -e ORDERER_GENERAL_TLS_ENABLED=true \
            -e ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key \
            -e ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt \
            -e ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt] \
