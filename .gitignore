@@ -1,4 +1,5 @@
 crypto-config/
 channel-artifacts/
+orderer.example.com/
 
 fabric_*.sh
