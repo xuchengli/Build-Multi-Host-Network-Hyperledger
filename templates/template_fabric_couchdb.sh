@@ -2,7 +2,7 @@
 
 docker run --rm -it \
            --network="OVERLAY_NETWORK" \
-           --name couchdb0 \
+           --name COUCHDB_NAME \
            -p 5984:5984 \
            -e COUCHDB_USER= \
            -e COUCHDB_PASSWORD= \
