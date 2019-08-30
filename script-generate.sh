@@ -48,6 +48,15 @@ function fabric_peer() {
   fi
 }
 
+function fabric_cli() {
+  cp ./templates/template_fabric_cli.sh fabric_cli.sh
+  chmod +x fabric_cli.sh
+
+  sed $OPTS "s/OVERLAY_NETWORK/${OVERLAY_NETWORK}/g" fabric_cli.sh
+  sed $OPTS "s/PEER0_NAME/$1/g" fabric_cli.sh
+  sed $OPTS "s/PEER1_NAME/$2/g" fabric_cli.sh
+}
+
 # sed on MacOSX does not support -i flag with a null extension. We will use
 # 't' for our back-up's extension and delete it at the end of the function
 ARCH=$(uname -s | grep Darwin)
@@ -61,11 +70,14 @@ OVERLAY_NETWORK="fabric-net"
 fabric_ca
 fabric_orderer
 fabric_couchdb couchdb0
-fabric_couchdb couchdb1
 fabric_peer peer0.org1.example.com couchdb0 peer1.org1.example.com
+fabric_couchdb couchdb1
+fabric_peer peer1.org1.example.com couchdb1 peer0.org1.example.com
+fabric_cli peer0.org1.example.com peer1.org1.example.com
 
 # If MacOSX, remove the temporary backup of the docker-compose file
 if [ "$ARCH" == "Darwin" ]; then
   rm fabric_ca.sht
   rm fabric_orderer.sht
+  rm fabric_cli.sht
 fi
