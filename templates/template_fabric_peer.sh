@@ -13,7 +13,7 @@ docker run --rm -it \
            -e CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD= \
            -e CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock \
            -e FABRIC_LOGGING_SPEC=INFO \
-           -e CORE_PEER_TLS_ENABLED=true \
+           -e CORE_PEER_TLS_ENABLED=false \
            -e CORE_PEER_GOSSIP_USELEADERELECTION=true \
            -e CORE_PEER_GOSSIP_ORGLEADER=false \
            -e CORE_PEER_PROFILE_ENABLED=true \

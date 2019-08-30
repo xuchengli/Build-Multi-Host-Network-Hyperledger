@@ -6,7 +6,7 @@ docker run --rm -it \
            -p 7054:7054 \
            -e FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server \
            -e FABRIC_CA_SERVER_CA_NAME=ca.example.com \
-           -e FABRIC_CA_SERVER_TLS_ENABLED=true \
+           -e FABRIC_CA_SERVER_TLS_ENABLED=false \
            -e FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org1.example.com-cert.pem \
            -e FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/CA_PRIVATE_KEY \
            -e FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org1.example.com-cert.pem \
