@@ -11,11 +11,6 @@ function fabric_ca() {
   cd "$CURRENT_DIR"
   sed $OPTS "s/CA_PRIVATE_KEY/${PRIV_KEY}/g" fabric_ca.sh
   sed $OPTS "s/OVERLAY_NETWORK/${OVERLAY_NETWORK}/g" fabric_ca.sh
-
-  # If MacOSX, remove the temporary backup of the docker-compose file
-  if [ "$ARCH" == "Darwin" ]; then
-    rm fabric_ca.sht
-  fi
 }
 
 function fabric_orderer() {
@@ -23,11 +18,13 @@ function fabric_orderer() {
   chmod +x fabric_orderer.sh
 
   sed $OPTS "s/OVERLAY_NETWORK/${OVERLAY_NETWORK}/g" fabric_orderer.sh
+}
 
-  # If MacOSX, remove the temporary backup of the docker-compose file
-  if [ "$ARCH" == "Darwin" ]; then
-    rm fabric_orderer.sht
-  fi
+function fabric_couchdb() {
+  cp ./templates/template_fabric_couchdb.sh fabric_couchdb.sh
+  chmod +x fabric_couchdb.sh
+
+  sed $OPTS "s/OVERLAY_NETWORK/${OVERLAY_NETWORK}/g" fabric_couchdb.sh
 }
 
 # sed on MacOSX does not support -i flag with a null extension. We will use
@@ -42,3 +39,11 @@ OVERLAY_NETWORK="fabric-net"
 
 fabric_ca
 fabric_orderer
+fabric_couchdb
+
+# If MacOSX, remove the temporary backup of the docker-compose file
+if [ "$ARCH" == "Darwin" ]; then
+  rm fabric_ca.sht
+  rm fabric_orderer.sht
+  rm fabric_couchdb.sht
+fi
