@@ -5,8 +5,9 @@ function fabric_ca() {
   chmod +x fabric_ca.sh
 
   CURRENT_DIR=$PWD
-  cd crypto-config/peerOrganizations/org1.example.com/ca/
-  PRIV_KEY=$(ls *_sk)
+  # cd crypto-config/peerOrganizations/org1.example.com/ca/
+  # PRIV_KEY=$(ls *_sk)
+  PRIV_KEY=$(docker run --rm -it -v sshvolume:/root/fabric-artifacts busybox ls /root/fabric-artifacts/crypto-config/peerOrganizations/org1.example.com/ca | grep _sk)
 
   cd "$CURRENT_DIR"
   sed $OPTS "s/CA_PRIVATE_KEY/${PRIV_KEY}/g" fabric_ca.sh
