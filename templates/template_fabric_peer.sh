@@ -17,9 +17,9 @@ docker run --rm -it \
            -e CORE_PEER_GOSSIP_USELEADERELECTION=true \
            -e CORE_PEER_GOSSIP_ORGLEADER=false \
            -e CORE_PEER_PROFILE_ENABLED=true \
-           -e CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/crypto-config/peerOrganizations/org1.example.com/peers/PEER_NAME/tls/server.crt \
-           -e CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/crypto-config/peerOrganizations/org1.example.com/peers/PEER_NAME/tls/server.key \
-           -e CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/crypto-config/peerOrganizations/org1.example.com/peers/PEER_NAME/tls/ca.crt \
+           -e CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt \
+           -e CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key \
+           -e CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt \
            -e CORE_PEER_ID=PEER_NAME \
            -e CORE_PEER_ADDRESS=PEER_NAME:7051 \
            -e CORE_PEER_LISTENADDRESS=0.0.0.0:7051 \
@@ -28,10 +28,11 @@ docker run --rm -it \
            -e CORE_PEER_GOSSIP_BOOTSTRAP=BOOTSTRAP_NODE_NAME:7051 \
            -e CORE_PEER_GOSSIP_EXTERNALENDPOINT=PEER_NAME:7051 \
            -e CORE_PEER_LOCALMSPID=Org1MSP \
-           -e CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/crypto-config/peerOrganizations/org1.example.com/peers/PEER_NAME/msp/ \
            -e CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=OVERLAY_NETWORK \
            -e GODEBUG=netdns=go \
            -v /var/run/:/host/var/run/ \
-           -v sshvolume:/etc/hyperledger/fabric \
+           -v $(pwd)/crypto-config/peerOrganizations/org1.example.com/peers/PEER_NAME/msp:/etc/hyperledger/fabric/msp \
+           -v $(pwd)/crypto-config/peerOrganizations/org1.example.com/peers/PEER_NAME/tls:/etc/hyperledger/fabric/tls \
+           -v $(pwd)/PEER_NAME:/var/hyperledger/production \
            -w /opt/gopath/src/github.com/hyperledger/fabric/peer \
            hyperledger/fabric-peer peer node start
