@@ -28,6 +28,7 @@ docker run --rm -it \
            -e CORE_PEER_GOSSIP_BOOTSTRAP=BOOTSTRAP_NODE_NAME:7051 \
            -e CORE_PEER_GOSSIP_EXTERNALENDPOINT=PEER_NAME:7051 \
            -e CORE_PEER_LOCALMSPID=Org1MSP \
+           -e CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/crypto-config/peerOrganizations/org1.example.com/peers/PEER_NAME/msp/ \
            -e CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=OVERLAY_NETWORK \
            -e GODEBUG=netdns=go \
            -v /var/run/:/host/var/run/ \
